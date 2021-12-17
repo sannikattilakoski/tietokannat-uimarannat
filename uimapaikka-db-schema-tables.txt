@@ -1,0 +1,146 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema uimapaikka_db
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema uimapaikka_db
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `uimapaikka_db` ;
+USE `uimapaikka_db` ;
+
+-- -----------------------------------------------------
+-- Table `uimapaikka_db`.`Kotikunta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `uimapaikka_db`.`Kotikunta` (
+  `Postinumero` INT NOT NULL,
+  `Postitoimipaikka` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Postinumero`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `uimapaikka_db`.`Uimari`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `uimapaikka_db`.`Uimari` (
+  `Hetu` VARCHAR(11) NOT NULL,
+  `Etunimi` VARCHAR(45) NOT NULL,
+  `Sukunimi` VARCHAR(45) NOT NULL,
+  `Puhelinnumero` VARCHAR(45) NOT NULL,
+  `Postinumero` INT NOT NULL,
+  `Sukupuoli` VARCHAR(45) NULL,
+  PRIMARY KEY (`Hetu`),
+  INDEX `fk_Uimari_Kotikunta_idx` (`Postinumero` ASC),
+  CONSTRAINT `fk_Uimari_Kotikunta`
+    FOREIGN KEY (`Postinumero`)
+    REFERENCES `uimapaikka_db`.`Kotikunta` (`Postinumero`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `uimapaikka_db`.`Sijaintipaikka`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `uimapaikka_db`.`Sijaintipaikka` (
+  `PaikkaId` INT NOT NULL AUTO_INCREMENT,
+  `Paikkakunta` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`PaikkaId`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `uimapaikka_db`.`Uimapaikka`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `uimapaikka_db`.`Uimapaikka` (
+  `UimapaikkaId` INT NOT NULL AUTO_INCREMENT,
+  `UimapaikkaNimi` VARCHAR(45) NOT NULL,
+  `PaikkaId` INT NOT NULL,
+  `KoordinaatitLat` VARCHAR(11) NOT NULL,
+  `KoordinaatitLng` VARCHAR(11) NOT NULL,
+  `Kuvaus` VARCHAR(256) NOT NULL,
+  INDEX `fk_Uimapaikka_Sijaintikunta1_idx` (`PaikkaId` ASC),
+  PRIMARY KEY (`UimapaikkaId`),
+  CONSTRAINT `fk_Uimapaikka_Sijaintikunta1`
+    FOREIGN KEY (`PaikkaId`)
+    REFERENCES `uimapaikka_db`.`Sijaintipaikka` (`PaikkaId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `uimapaikka_db`.`VedenLaatu`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `uimapaikka_db`.`VedenLaatu` (
+  `VedenLaatuId` INT NOT NULL AUTO_INCREMENT,
+  `Laatu` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`VedenLaatuId`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `uimapaikka_db`.`Mittausdata`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `uimapaikka_db`.`Mittausdata` (
+  `MittausdataId` INT NOT NULL AUTO_INCREMENT,
+  `UimapaikkaId` INT NOT NULL,
+  `IlmanLampotila` INT NOT NULL,
+  `VedenLampotila` INT NOT NULL,
+  `VedenLaatuId` INT NOT NULL,
+  `Paivamaara` DATE NOT NULL,
+  PRIMARY KEY (`MittausdataId`),
+  INDEX `fk_Mittausdata_VedenLaatu1_idx` (`VedenLaatuId` ASC),
+  INDEX `fk_Mittausdata_Uimapaikka1_idx` (`UimapaikkaId` ASC),
+  CONSTRAINT `fk_Mittausdata_VedenLaatu1`
+    FOREIGN KEY (`VedenLaatuId`)
+    REFERENCES `uimapaikka_db`.`VedenLaatu` (`VedenLaatuId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Mittausdata_Uimapaikka1`
+    FOREIGN KEY (`UimapaikkaId`)
+    REFERENCES `uimapaikka_db`.`Uimapaikka` (`UimapaikkaId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `uimapaikka_db`.`Uimareissu`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `uimapaikka_db`.`Uimareissu` (
+  `UimareissuId` INT NOT NULL AUTO_INCREMENT,
+  `Hetu` VARCHAR(11) NOT NULL,
+  `UimapaikkaId` INT NOT NULL,
+  `Pvm` DATE NOT NULL,
+  `ArvosanaPalvelut` INT NOT NULL,
+  `ArvosanaSiisteys` INT NOT NULL,
+  `ArvosanaOpasteet` INT NOT NULL,
+  `ArvosanaIhmismaara` INT NOT NULL,
+  `Yleisarvosana` INT NOT NULL,
+  `Henkilomaara` INT NOT NULL,
+  `Palaute` VARCHAR(256) NULL,
+  INDEX `fk_Uimari_has_Uimapaikka_Uimapaikka1_idx` (`UimapaikkaId` ASC),
+  INDEX `fk_Uimari_has_Uimapaikka_Uimari1_idx` (`Hetu` ASC),
+  PRIMARY KEY (`UimareissuId`),
+  CONSTRAINT `fk_Uimari_has_Uimapaikka_Uimari1`
+    FOREIGN KEY (`Hetu`)
+    REFERENCES `uimapaikka_db`.`Uimari` (`Hetu`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Uimari_has_Uimapaikka_Uimapaikka1`
+    FOREIGN KEY (`UimapaikkaId`)
+    REFERENCES `uimapaikka_db`.`Uimapaikka` (`UimapaikkaId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

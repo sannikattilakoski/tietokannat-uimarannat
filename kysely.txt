@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
+
+	<title>
+		Uimarannan kyselylomake
+	</title>
+
+	<style>
+	
+		.otsikko {
+			color:#3366cc;
+		}
+
+		/* Styling the Body element i.e. Color,
+		Font, Alignment */
+		body {
+			background-color: white;
+			font-family: "Amatic SC", cursive;
+			font-weight: bold;
+			text-align: center;
+			color: #3366cc;
+			font-size: 16px;
+		}
+
+		/* Styling the Form (Color, Padding, Shadow) */
+		form {
+			background-color: #fff;
+			max-width: 500px;
+			margin: 50px auto;
+			padding: 30px 20px;
+			box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+		}
+
+		/* Styling form-control Class */
+		.form-control {
+			text-align: left;
+			margin-bottom: 25px;
+		}
+
+		/* Styling form-control Label */
+		.form-control label {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		/* Styling form-control input,
+		select, textarea */
+		.form-control input,
+		.form-control select,
+		.form-control textarea {
+			border: 1px solid #777;
+			border-radius: 2px;
+			font-family: inherit;
+			padding: 10px;
+			display: block;
+			width: 95%;
+			color: black;
+			font-size: 16px;
+		}
+
+		/* Styling form-control Radio
+		button and Checkbox */
+		.form-control input[type="radio"],
+		.form-control input[type="checkbox"] {
+			display: inline-block;
+			width: auto;
+		}
+
+		/* Styling Button */
+		button {
+			background-color: #3366cc;
+			color: white;
+			font-family: "Amatic SC", cursive;
+			font-size: 24px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1 class="otsikko">Kuinka uimareissusi sujui?</h1>
+
+	<!-- Create Form -->
+	<!-- Jätetään vielä tässä vaiheessa pois datan vienti tietokantaan -->
+	<!-- <form id="form" action="kysely.php" method="post"> -->
+	<form id="form">
+
+		<!-- Details -->
+		<div class="form-control">
+            <label for="uimapaikka" id="label-uimapaikka">
+                Missä uimapaikassa kävit?
+            </label>
+             
+            <!-- Dropdown options -->
+            <select name="uimapaikka" id="uimapaikka">
+                <option value="1">Tuomiojärvi</option>
+                <option value="2">Köhniö</option>
+                <option value="3">Tikka</option>
+                <option value="4">Sääksjärvi</option>
+				<option value="5">Uimalanniemi</option>
+				<option value="6">Jyskä</option>
+				<option value="7">Kirri</option>
+				<option value="8">Myllylampi</option>
+				<option value="9">Ollila</option>
+				<option value="10">Lohikoski</option>
+				<option value="11">Pappila</option>
+				<option value="12">Autiolahti</option>
+				<option value="13">Mansikkaniemi</option>
+				<option value="14">Matoranta</option>
+				<option value="15">Tiaisniemi</option>
+				<option value="16">Kukkoniemi</option>
+				<option value="17">Lossinrannan uimala</option>
+				<option value="18">Heikkilänmäen uimapaikka</option>
+				<option value="19">Kankaalanranta</option>
+				<option value="20">Nuottala</option>
+				<option value="21">Myllärinpuiston uimaranta</option>
+				<option value="22">Viitaniemi</option>
+				<option value="23">Hiekan uimala</option>
+				<option value="24">Kurkelan uimaranta</option>
+				<option value="25">Häikkä</option>
+				<option value="26">Hiekka</option>
+				<option value="27">Lossinranta</option>
+				<option value="28">Suojärvi</option>
+				<option value="29">Äänejärven uimaranta</option>
+				<option value="30">Kovalan uimaranta</option>
+				<option value="31">Pohjoishiekka</option>
+				<option value="32">Hietalahden uimaranta</option>
+				<option value="33">Korttajärvi</option>
+				<option value="34">Luonetjärvi</option>
+            </select>
+        </div>
+		
+		<div class="form-control">
+            <label for="henkilomaara" id="label-henkilomaara">
+                Montako henkilöä oli seurueessanne?
+            </label>
+             
+            <!-- Dropdown options -->
+            <select name="henkilomaara" id="henkilomaara">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+				<option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+				<option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </div>
+		
+		<div class="form-control">
+			<label for="pvm" id="label-pvm">
+				Päivämäärä
+			</label>
+
+			<!-- Input Type Text -->
+			<input type="text" id="pvm" name="pvm" placeholder="Anna päivämäärä" />
+		</div>
+
+		
+		<div class="form-control">
+			<label for="etunimi" id="label-etunimi">
+				Etunimi
+			</label>
+
+			<!-- Input Type Text -->
+			<input type="text" id="etunimi" name="etunimi" placeholder="Anna etunimesi" />
+		</div>
+
+		<div class="form-control">
+			<label for="sukunimi" id="label-sukunimi">
+				Sukunimi
+			</label>
+
+			<!-- Input Type Email-->
+			<input type="text" id="sukunimi" name="sukunimi" placeholder="Anna sukunimesi" />
+		</div>
+
+		<div class="form-control">
+			<label for="hetu" id="label-hetu">
+				Hetu
+			</label>
+
+			<!-- Input Type Text -->
+			<input type="text" id="hetu" name="hetu" placeholder="Anna henkilötunnuksesi" />
+		</div>
+		
+		<div class="form-control">
+			<label for="puh" id="label-puh">
+				Puhelinnumero
+			</label>
+
+			<!-- Input Type Text -->
+			<input type="text" id="puh" name="puh" placeholder="Anna puhelinnumerosi" />
+		</div>
+		
+		<div class="form-control">
+			<label for="zip" id="label-zip">
+				Postinumero
+			</label>
+
+			<!-- Input Type Text -->
+			<input type="text" id="zip" name="zip" placeholder="Anna asuinpaikkasi postinumero" />
+		</div>
+
+
+		<div class="form-control">
+			<label>
+				Mikä on sukupuolesi?
+			</label>
+
+			<!-- Input Type Radio Button -->
+			<label>
+				<input type="radio" id="nainen" name="sukupuoli" value="n">Nainen</input>
+				<input type="radio" id="mies" name="sukupuoli" value="m">Mies</input>
+				<input type="radio" id="muu" name="sukupuoli" value="o">Muu</input>
+				<input type="radio" id="null" name="sukupuoli" value="x">En halua kertoa</input>
+			</label>
+		</div>
+		
+		<div class="form-control">
+			<label>
+				Olivatko rannan palvelut mielestäsi riittävät?
+			</label>
+
+			<!-- Input Type Radio Button -->
+			<label>
+				<input type="radio" id="1" name="palvelu" value="1">Huono</input>
+				<input type="radio" id="2" name="palvelu" value="2">Välttävä</input>
+				<input type="radio" id="3" name="palvelu" value="3">Ihan okei</input>
+				<input type="radio" id="4" name="palvelu" value="4">Hyvä</input>
+				<input type="radio" id="5" name="palvelu" value="5">Erinomainen</input>
+			</label>
+		</div>
+		
+				<div class="form-control">
+			<label>
+				Millainen oli mielestäsi rannan siisteys tällä käynnillä?
+			</label>
+
+			<!-- Input Type Radio Button -->
+			<label>
+				<input type="radio" id="1" name="siisteys" value="1">Huono</input>
+				<input type="radio" id="2" name="siisteys" value="2">Välttävä</input>
+				<input type="radio" id="3" name="siisteys" value="3">Ihan okei</input>
+				<input type="radio" id="4" name="siisteys" value="4">Hyvä</input>
+				<input type="radio" id="5" name="siisteys" value="5">Erinomainen</input>
+			</label>
+		</div>
+		
+				<div class="form-control">
+			<label>
+				Oliko rannalle riittävät opasteet?
+			</label>
+
+			<!-- Input Type Radio Button -->
+			<label>
+				<input type="radio" id="1" name="opasteet" value="1">Huono</input>
+				<input type="radio" id="2" name="opasteet" value="2">Välttävä</input>
+				<input type="radio" id="3" name="opasteet" value="3">Ihan okei</input>
+				<input type="radio" id="4" name="opasteet" value="4">Hyvä</input>
+				<input type="radio" id="5" name="opasteet" value="5">Erinomainen</input>
+			</label>
+		</div>
+		
+				<div class="form-control">
+			<label>
+				Oliko rannalla ruuhkaa vai riittävän väljää?
+			</label>
+
+			<!-- Input Type Radio Button -->
+			<label>
+				<input type="radio" id="1" name="ruuhka" value="1">Huono</input>
+				<input type="radio" id="2" name="ruuhka" value="2">Välttävä</input>
+				<input type="radio" id="3" name="ruuhka" value="3">Ihan okei</input>
+				<input type="radio" id="4" name="ruuhka" value="4">Hyvä</input>
+				<input type="radio" id="5" name="ruuhka" value="5">Erinomainen</input>
+			</label>
+		</div>
+		
+				<div class="form-control">
+			<label>
+				Minkä yleisarvosanan antaisit tälle uimareissulle?
+			</label>
+
+			<!-- Input Type Radio Button -->
+			<label>
+				<input type="radio" id="1" name="yleis" value="1">Huono</input>
+				<input type="radio" id="2" name="yleis" value="2">Välttävä</input>
+				<input type="radio" id="3" name="yleis" value="3">Ihan okei</input>
+				<input type="radio" id="4" name="yleis" value="4">Hyvä</input>
+				<input type="radio" id="5" name="yleis" value="5">Erinomainen</input>
+			</label>
+		</div>
+		<div class="form-control">
+            <label for="comment">
+                Haluatko antaa vielä palautetta?
+            </label>
+ 
+            <!-- multi-line text input control -->
+            <textarea name="comment" id="comment"
+                placeholder="Kirjoita palautteesi tähän">
+            </textarea>
+        </div>
+
+
+		<!-- Multi-line Text Input Control -->
+		<button type="submit" value="submit" onclick="window.open('https://student.labranet.jamk.fi/~AB5148/tietokannat_harkat/Tietokannat_harkkatyo/uimaranta_webpage.php')">Lähetä</button>
+		</a>
+	</form>
+</body>
+
+</html>
